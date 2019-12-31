@@ -11,6 +11,10 @@ AFloater::AFloater()
 
 	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("CustomStaticMesh"));
 
+	InitialLocation = FVector(0.0f);
+	PlacedLocation = FVector(0.0f);
+
+	bInitializeFloaterLocations = false;
 }
 
 // Called when the game starts or when spawned
@@ -18,9 +22,13 @@ void AFloater::BeginPlay()
 {
 	Super::BeginPlay();
 
-	FVector InitialLocation = FVector(0.0f);
+	PlacedLocation = GetActorLocation();
 
-	SetActorLocation(InitialLocation);
+	if (bInitializeFloaterLocations)
+	{
+		SetActorLocation(InitialLocation);
+	}
+	
 	
 }
 
